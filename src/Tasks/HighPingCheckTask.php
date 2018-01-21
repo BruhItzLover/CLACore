@@ -14,6 +14,7 @@ class HighPingCheckTask extends PluginTask {
 
     public function __construct(Core $plugin){
         $this->plugin = $plugin;
+        $this->plugin->getScheduler()->scheduleRepeatingTask(new $this($this->plugin), 100);
         parent::__construct($plugin);
     }
 
