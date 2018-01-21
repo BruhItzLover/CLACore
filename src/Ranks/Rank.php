@@ -18,103 +18,104 @@ class Rank implements Listener{
 
     private $core;
     
-    public function __construct(Core $core){
-        $this->core = $core;
+    public function __construct(Core $plugin){
+        $this->plugin = $plugin;
+        
     }
 
-    public function onLogin(PlayerLoginEvent $e){
-        $player = $e->getPlayer();
+    public function onLogin(PlayerLoginEvent $event) : void {
+        $player = $event->getPlayer();
         $this->setRank($player);
     }
 
-    public function onJoin(PlayerJoinEvent $e){
-        $player = $e->getPlayer();
+    public function onJoin(PlayerJoinEvent $event) : void {
+        $player = $event->getPlayer();
         $this->setRank($player);
     }
 
-    public function onRespawn(PlayerRespawnEvent $e){
-        $player = $e->getPlayer();
+    public function onRespawn(PlayerRespawnEvent $event) : void {
+        $player = $event->getPlayer();
         $this->setRank($player);
     }
 
-    public function setRank(Player $player){
+    public function setRank(Player $player) {
         $name = $player->getName();
-        $rankcfg = new Config($this->core->getDataFolder() . "rank.yml", Config::YAML);
-        $rank = $rankcfg->get($name);
+        $config = new Config($this->core->getDataFolder() . "rank.yml", Config::YAML);
+        $rank = $config->get($name);
 
         ## Default ##
-        $deftag = $rankcfg->get("Default-Tag");
-        $deftag = str_replace("{name}", $name, $deftag);
-        $player->setNameTag($deftag);
+        $default = $config->get("Default-Tag");
+        $default = str_replace("{name}", $name, $default);
+        $player->setNameTag($default);
 
         ## VIP ##
         if($rank == "VIP"){
-            $viptag = $rankcfg->get("VIP-Tag");
-            $viptag = str_replace("{name}", $name, $viptag);
-            $player->setNameTag($viptag);
+            $vip = $config->get("VIP-Tag");
+            $vip = str_replace("{name}", $name, $vip);
+            $player->setNameTag($vip);
         }
 
         ## VIP+ ##
         if($rank == "VIP+"){
-            $vipplustag = $rankcfg->get("VIP+-Tag");
-            $vipplustag = str_replace("{name}", $name, $vipplustag);
-            $player->setNameTag($vipplustag);
+            $vipplus = $config->get("VIP+-Tag");
+            $vipplus = str_replace("{name}", $name, $vipplus);
+            $player->setNameTag($vipplus);
         }
 
         ## MVP ##
         if($rank == "MVP"){
-            $mvptag = $rankcfg->get("MVP-Tag");
-            $mvptag = str_replace("{name}", $name, $mvptag);
-            $player->setNameTag($mvptag);
+            $mvp = $config->get("MVP-Tag");
+            $mvp = str_replace("{name}", $name, $mvp);
+            $player->setNameTag($mvp);
         }
 
         ## MVP+ ##
         if($rank == "MVP+"){
-            $mvpplustag = $rankcfg->get("MVP+-Tag");
-            $mvpplustag = str_replace("{name}", $name, $mvpplustag);
-            $player->setNameTag($mvpplustag);
+            $mvpplus = $config->get("MVP+-Tag");
+            $mvpplus = str_replace("{name}", $name, $mvpplus);
+            $player->setNameTag($mvpplus);
         }
 
         ## YouTuber ##
         if($rank == "YouTuber"){
-            $yttag = $rankcfg->get("YouTuber-Tag");
-            $yttag = str_replace("{name}", $name, $yttag);
-            $player->setNameTag($yttag);
+            $yt = $config->get("YouTuber-Tag");
+            $yt = str_replace("{name}", $name, $yt);
+            $player->setNameTag($yt);
         }
 
         ## Creator ##
         if($rank == "Creator"){
-            $creatortag = $rankcfg->get("Creator-Tag");
-            $creatortag = str_replace("{name}", $name, $creatortag);
-            $player->setNameTag($creatortag);
+            $creator = $config->get("Creator-Tag");
+            $creator = str_replace("{name}", $name, $creator);
+            $player->setNameTag($creator);
         }
 
         ## Owner ##
         if($rank == "Owner"){
-            $ownertag = $rankcfg->get("Owner-Tag");
-            $ownertag = str_replace("{name}", $name, $ownertag);
-            $player->setNameTag($ownertag);
+            $owner = $config->get("Owner-Tag");
+            $owner = str_replace("{name}", $name, $owner);
+            $player->setNameTag($owner);
         }
 
         ## CoOwner ##
         if($rank == "CoOwner"){
-            $coownertag = $rankcfg->get("CoOwner-Tag");
-            $coownertag = str_replace("{name}", $name, $coownertag);
-            $player->setNameTag($coownertag);
+            $coowner = $config->get("CoOwner-Tag");
+            $coowner = str_replace("{name}", $name, $coowner);
+            $player->setNameTag($coowner);
         }
 
         ## Admin ##
         if($rank == "Admin"){
-            $admintag = $rankcfg->get("Admin-Tag");
-            $admintag = str_replace("{name}", $name, $admintag);
-            $player->setNameTag($admintag);
+            $admin = $config->get("Admin-Tag");
+            $admin = str_replace("{name}", $name, $admin);
+            $player->setNameTag($admin);
         }
 
         ## Mod ##
         if($rank == "Mod"){
-            $modtag = $rankcfg->get("Mod-Tag");
-            $modtag = str_replace("{name}", $name, $modtag);
-            $player->setNameTag($modtag);
+            $mod = $config->get("Mod-Tag");
+            $mod = str_replace("{name}", $name, $mod);
+            $player->setNameTag($mod);
         }
 
         ## Developer ##
